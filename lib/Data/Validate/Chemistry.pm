@@ -3,6 +3,7 @@ package Data::Validate::Chemistry;
 use strict;
 use warnings;
 
+# ABSTRACT: Validate common chemical identifiers
 # VERSION
 
 use Exporter 'import';

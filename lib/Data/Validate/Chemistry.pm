@@ -3,6 +3,8 @@ package Data::Validate::Chemistry;
 use strict;
 use warnings;
 
+# VERSION
+
 use Exporter 'import';
 our @EXPORT_OK = qw( is_CAS_number );
 

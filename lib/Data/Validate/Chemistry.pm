@@ -33,7 +33,15 @@ sub is_European_Community_number
     my @digits = $EC_number =~ /([0-9])/g;
     my $checksum = pop @digits;
 
-    return $checksum == _ISBN_like_checksum( 11, @digits );
+    if( $digits[0] == 4 && $checksum == 1 ) {
+        # There are 181 ELINCS numbers starting with 4 having checksum
+        # of 10 and with a checksum digit of 1, as given in
+        # https://en.wikipedia.org/w/index.php?title=European_Community_number&oldid=910557632
+        return _ISBN_like_checksum( 11, @digits ) == $checksum ||
+               _ISBN_like_checksum( 11, @digits ) == 10;
+    } else {
+        return _ISBN_like_checksum( 11, @digits ) == $checksum;
+    }
 }
 
 sub _ISBN_like_checksum

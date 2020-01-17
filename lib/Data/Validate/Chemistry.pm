@@ -21,11 +21,7 @@ sub is_CAS_number
     my @digits = $CAS_number =~ /([0-9])/g;
     my $checksum = pop @digits;
 
-    my $checksum_now = 0;
-    for (1..@digits) {
-        $checksum_now = ($checksum_now + $digits[-$_] * $_) % 10;
-    }
-    return $checksum == $checksum_now;
+    return $checksum == _ISBN_like_checksum( 10, reverse @digits );
 }
 
 sub is_European_Community_number
@@ -33,6 +29,22 @@ sub is_European_Community_number
     my( $EC_number ) = shift;
 
     return unless $EC_number =~ /^([0-9]{3}-){2}[0-9]$/;
+
+    my @digits = $EC_number =~ /([0-9])/g;
+    my $checksum = pop @digits;
+
+    return $checksum == _ISBN_like_checksum( 11, @digits );
+}
+
+sub _ISBN_like_checksum
+{
+    my $modulo = shift;
+
+    my $checksum = 0;
+    for (0..$#_) {
+        $checksum = ($checksum + $_[$_] * ($_ + 1)) % $modulo;
+    }
+    return $checksum;
 }
 
 1;

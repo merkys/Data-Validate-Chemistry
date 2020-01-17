@@ -7,7 +7,10 @@ use warnings;
 # VERSION
 
 use Exporter 'import';
-our @EXPORT_OK = qw( is_CAS_number );
+our @EXPORT_OK = qw(
+    is_CAS_number
+    is_European_Community_number
+);
 
 sub is_CAS_number
 {
@@ -23,6 +26,13 @@ sub is_CAS_number
         $checksum_now = ($checksum_now + $digits[-$_] * $_) % 10;
     }
     return $checksum == $checksum_now;
+}
+
+sub is_European_Community_number
+{
+    my( $EC_number ) = shift;
+
+    return unless $EC_number =~ /^([0-9]{3}-){2}[0-9]$/;
 }
 
 1;

@@ -56,3 +56,36 @@ sub _ISBN_like_checksum
 }
 
 1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+Data::Validate::Chemistry - Validate common chemical identifiers
+
+=head1 SYNOPSIS
+
+    use Data::Validate::Chemistry qw( is_CAS_number is_European_Community_number );
+
+    print "OK\n" if is_CAS_number( '7732-18-5' );
+    print "OK\n" if is_European_Community_number( '200-003-9' );
+
+=head1 DESCRIPTION
+
+Data::Validate::Chemistry validates some of the common chemical
+identifiers, namely, CAS and European Community numbers.
+
+=head1 AUTHORS
+
+Andrius Merkys, C<< merkys AT cpan DOT org >>
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2020 Andrius Merkys
+
+This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
+
+=cut
